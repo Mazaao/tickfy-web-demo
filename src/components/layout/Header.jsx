@@ -19,27 +19,30 @@ const navigation = [
     name: 'Learn', 
     href: '/learn',
     items: [
-      { name: 'What is Tickfy?', href: '/learn/what-is-tickfy', description: 'Learn the fundamentals' },
-      { name: 'Guides', href: '/learn/guides', description: 'Step-by-step tutorials' },
-      { name: 'History', href: '/learn/history', description: 'How Tickfy started' }
+      { name: 'Overview', href: '/learn#overview', description: 'Understanding the platform and its benefits' },
+      { name: 'How It Works', href: '/learn#how-it-works', description: 'NFT tickets and blockchain technology' },
+      { name: 'Token System', href: '/learn#tokens', description: 'TKFY and TKFYT tokens explained' },
+      { name: 'For Your Business', href: '/learn#for-business', description: 'Benefits for producers and developers' }
     ]
   },
   { 
     name: 'Use', 
     href: '/use',
     items: [
-      { name: 'Find Wallets', href: '/use/wallets', description: 'Secure wallet options' },
-      { name: 'Get TICK', href: '/use/get-tick', description: 'Buy and store TICK' },
-      { name: 'Decentralized Apps', href: '/use/dapps', description: 'Explore the ecosystem' }
+      { name: 'Overview', href: '/use#overview', description: 'Why use Tickfy Network' },
+      { name: 'Wallets', href: '/use#wallets', description: 'Set up your wallet to use the network' },
+      { name: 'Tickets', href: '/use#tickets', description: 'How to buy and manage NFT tickets' },
+      { name: 'Events', href: '/use#events', description: 'Create and organize events' },
+      { name: 'Marketplace', href: '/use#marketplace', description: 'Secure buy and sell' }
     ]
   },
   { 
-    name: 'Build', 
-    href: '/build',
+    name: 'Developers', 
+    href: '/developers',
     items: [
-      { name: 'Developer Resources', href: '/build/developers', description: 'Tools and SDKs' },
-      { name: 'Documentation', href: '/build/docs', description: 'Technical guides' },
-      { name: 'Tutorials', href: '/build/tutorials', description: 'Learn by building' }
+      { name: 'Overview', href: '/developers#overview', description: 'Why develop on Tickfy' },
+      { name: 'APIs & Integration', href: '/developers#apis', description: 'SDKs and tools' },
+      { name: 'Blockchain', href: '/developers#blockchain', description: 'Contracts and infrastructure' }
     ]
   },
   { name: 'Community', href: '/community' },
@@ -59,6 +62,23 @@ export default function Header() {
   }, [])
 
   const isActive = (path) => location.pathname === path
+
+  const handleNavigationClick = (e, href) => {
+    // Se o link contém um hash (#), fazer scroll suave
+    if (href.includes('#')) {
+      const [path, hash] = href.split('#')
+      
+      // Se já estamos na página, apenas fazer scroll
+      if (location.pathname === path || path === '') {
+        e.preventDefault()
+        const element = document.getElementById(hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          setIsMenuOpen(false)
+        }
+      }
+    }
+  }
 
   return (
     <header className={cn(
@@ -93,6 +113,7 @@ export default function Header() {
                             <NavigationMenuLink key={subItem.name} asChild>
                               <Link
                                 to={subItem.href}
+                                onClick={(e) => handleNavigationClick(e, subItem.href)}
                                 className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                               >
                                 <div className="text-sm font-medium leading-none">{subItem.name}</div>
@@ -125,10 +146,12 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center space-x-3">
-            <Button variant="ghost" size="sm" className="gap-2">
-              <Wallet className="h-4 w-4" />
-              Connect Wallet
-            </Button>
+            <Link to="/buy-tokens#overview">
+              <Button variant="ghost" size="sm" className="gap-2">
+                <Wallet className="h-4 w-4" />
+                Buy Tokens
+              </Button>
+            </Link>
             <Button variant="gradient" size="sm" className="gap-2">
               <Rocket className="h-4 w-4" />
               Get Started
@@ -151,15 +174,18 @@ export default function Header() {
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="lg:hidden border-t bg-background/95 backdrop-blur-md">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+        <div className={cn(
+          "lg:hidden fixed inset-x-0 top-16 z-40 transform transition-transform duration-300 ease-in-out",
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        )}>
+          <div className="bg-background/95 backdrop-blur-md border-b shadow-lg min-h-screen">
+            <div className="px-4 pt-4 pb-6 space-y-2">
               {navigation.map((item) => (
                 <div key={item.name}>
                   <Link
                     to={item.href}
                     className={cn(
-                      "block px-3 py-2 rounded-md text-base font-medium transition-colors",
+                      "block px-4 py-3 rounded-lg text-base font-medium transition-colors",
                       isActive(item.href)
                         ? "bg-accent text-accent-foreground"
                         : "text-foreground hover:bg-accent hover:text-accent-foreground"
@@ -169,33 +195,43 @@ export default function Header() {
                     {item.name}
                   </Link>
                   {item.items && (
-                    <div className="ml-4 space-y-1">
+                    <div className="ml-4 mt-2 space-y-1">
                       {item.items.map((subItem) => (
                         <Link
                           key={subItem.name}
                           to={subItem.href}
-                          className="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-accent/50"
-                          onClick={() => setIsMenuOpen(false)}
+                          onClick={(e) => handleNavigationClick(e, subItem.href)}
+                          className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-accent/50 transition-colors"
                         >
-                          {subItem.name}
+                          • {subItem.name}
                         </Link>
                       ))}
                     </div>
                   )}
                 </div>
               ))}
-              <div className="pt-4 space-y-2 px-3">
-                <Button variant="ghost" className="w-full justify-start gap-2">
-                  <Wallet className="h-4 w-4" />
-                  Connect Wallet
-                </Button>
-                <Button variant="gradient" className="w-full gap-2">
-                  <Rocket className="h-4 w-4" />
+              <div className="pt-6 space-y-3 px-4">
+                <Link to="/buy-tokens">
+                  <Button variant="ghost" className="w-full justify-start gap-3 h-12" onClick={() => setIsMenuOpen(false)}>
+                    <Wallet className="h-5 w-5" />
+                    Buy Tokens
+                  </Button>
+                </Link>
+                <Button variant="gradient" className="w-full gap-3 h-12">
+                  <Rocket className="h-5 w-5" />
                   Get Started
                 </Button>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        {isMenuOpen && (
+          <div 
+            className="lg:hidden fixed inset-0 z-30 bg-black/20 backdrop-blur-sm"
+            onClick={() => setIsMenuOpen(false)}
+          />
         )}
       </div>
     </header>

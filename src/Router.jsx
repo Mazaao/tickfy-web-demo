@@ -3,9 +3,9 @@ import Layout from './components/layout/Layout'
 import Home from './pages/Home'
 import Learn from './pages/Learn'
 import Use from './pages/Use'
-import Build from './pages/Build'
 import Community from './pages/Community'
 import Developers from './pages/Developers'
+import BuyTokens from './pages/BuyTokens'
 
 const router = createBrowserRouter([
   {
@@ -25,16 +25,17 @@ const router = createBrowserRouter([
         element: <Use />,
       },
       {
-        path: "build",
-        element: <Build />,
-      },
-      {
         path: "community",
         element: <Community />,
       },
       {
         path: "developers",
         element: <Developers />,
+      },
+
+      {
+        path: "buy-tokens",
+        element: <BuyTokens />,
       },
     ],
   },
