@@ -311,7 +311,7 @@ export default function BuyTokens() {
                 For a complete guide on how to buy, sell, use tokens and explore all platform features, visit our dedicated section.
               </p>
             </div>
-            <Link to="/use">
+            <Link to="/learn">
               <Button size="lg" className="text-lg px-8">
                 View Complete Platform Guide
                 <ArrowRight className="ml-2 h-5 w-5" />

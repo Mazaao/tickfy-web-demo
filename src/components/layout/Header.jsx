@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '../ui/button'
 import Logo from '../ui/logo'
 import { 
@@ -11,29 +11,18 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '../ui/navigation-menu'
-import { Menu, X, ChevronDown, Wallet, Rocket } from 'lucide-react'
+import { Menu, X, ChevronDown, Wallet, Rocket, Pickaxe } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
 const navigation = [
   { 
-    name: 'Learn', 
+    name: 'Learn and Use', 
     href: '/learn',
     items: [
-      { name: 'Overview', href: '/learn#overview', description: 'Understanding the platform and its benefits' },
-      { name: 'How It Works', href: '/learn#how-it-works', description: 'NFT tickets and blockchain technology' },
-      { name: 'Token System', href: '/learn#tokens', description: 'TKFY and TKFYT tokens explained' },
-      { name: 'For Your Business', href: '/learn#for-business', description: 'Benefits for producers and developers' }
-    ]
-  },
-  { 
-    name: 'Use', 
-    href: '/use',
-    items: [
-      { name: 'Overview', href: '/use#overview', description: 'Why use Tickfy Network' },
-      { name: 'Wallets', href: '/use#wallets', description: 'Set up your wallet to use the network' },
-      { name: 'Tickets', href: '/use#tickets', description: 'How to buy and manage NFT tickets' },
-      { name: 'Events', href: '/use#events', description: 'Create and organize events' },
-      { name: 'Marketplace', href: '/use#marketplace', description: 'Secure buy and sell' }
+      { name: 'The Project', href: '/learn#the-project', description: 'How Tickfy Network was born and its purpose' },
+      { name: 'How it Works', href: '/learn#how-it-works', description: 'Step by step guide to use the platform' },
+      { name: 'Tokenomics', href: '/learn#tokenomics', description: 'Tokens, conversion rates, fees and mining' },
+      { name: 'Why to Join', href: '/learn#why-to-join', description: 'Benefits for producers, agencies and customers' }
     ]
   },
   { 
@@ -52,6 +41,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,6 +70,12 @@ export default function Header() {
     }
   }
 
+  const handleBecomeMinerClick = () => {
+    navigate('/become-miner')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setIsMenuOpen(false)
+  }
+
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
@@ -101,10 +97,7 @@ export default function Header() {
                 <NavigationMenuItem key={item.name}>
                   {item.items ? (
                     <>
-                      <NavigationMenuTrigger className={cn(
-                        navigationMenuTriggerStyle(),
-                        location.pathname.startsWith(item.href) && "bg-accent text-accent-foreground"
-                      )}>
+                      <NavigationMenuTrigger className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 focus:bg-transparent focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-transparent data-[state=open]:bg-gray-100 dark:data-[state=open]:bg-gray-800">
                         {item.name}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
@@ -114,7 +107,7 @@ export default function Header() {
                               <Link
                                 to={subItem.href}
                                 onClick={(e) => handleNavigationClick(e, subItem.href)}
-                                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 focus:bg-gray-100 dark:focus:bg-gray-800"
                               >
                                 <div className="text-sm font-medium leading-none">{subItem.name}</div>
                                 <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
@@ -130,10 +123,7 @@ export default function Header() {
                     <NavigationMenuLink asChild>
                       <Link
                         to={item.href}
-                        className={cn(
-                          navigationMenuTriggerStyle(),
-                          location.pathname === item.href && "bg-accent text-accent-foreground"
-                        )}
+                        className="inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 focus:bg-transparent focus:outline-none"
                       >
                         {item.name}
                       </Link>
@@ -146,16 +136,16 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center space-x-3">
+            <Button variant="outline" size="sm" className="gap-2 hover:bg-gray-100 dark:hover:bg-gray-800" onClick={handleBecomeMinerClick}>
+              <Pickaxe className="h-4 w-4" />
+              Become a Miner
+            </Button>
             <Link to="/buy-tokens#overview">
-              <Button variant="ghost" size="sm" className="gap-2">
+              <Button variant="default" size="sm" className="gap-2">
                 <Wallet className="h-4 w-4" />
                 Buy Tokens
               </Button>
             </Link>
-            <Button variant="gradient" size="sm" className="gap-2">
-              <Rocket className="h-4 w-4" />
-              Get Started
-            </Button>
           </div>
 
           {/* Mobile menu button */}
@@ -184,12 +174,7 @@ export default function Header() {
                 <div key={item.name}>
                   <Link
                     to={item.href}
-                    className={cn(
-                      "block px-4 py-3 rounded-lg text-base font-medium transition-colors",
-                      isActive(item.href)
-                        ? "bg-accent text-accent-foreground"
-                        : "text-foreground hover:bg-accent hover:text-accent-foreground"
-                    )}
+                    className="block px-4 py-3 rounded-lg text-base font-medium transition-colors text-foreground hover:bg-gray-100 dark:hover:bg-gray-800"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
@@ -201,7 +186,7 @@ export default function Header() {
                           key={subItem.name}
                           to={subItem.href}
                           onClick={(e) => handleNavigationClick(e, subItem.href)}
-                          className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-accent/50 transition-colors"
+                          className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                         >
                           • {subItem.name}
                         </Link>
@@ -211,16 +196,16 @@ export default function Header() {
                 </div>
               ))}
               <div className="pt-6 space-y-3 px-4">
+                <Button variant="outline" className="w-full justify-start gap-3 h-12 hover:bg-gray-100 dark:hover:bg-gray-800" onClick={handleBecomeMinerClick}>
+                  <Pickaxe className="h-5 w-5" />
+                  Become a Miner
+                </Button>
                 <Link to="/buy-tokens">
-                  <Button variant="ghost" className="w-full justify-start gap-3 h-12" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="default" className="w-full gap-3 h-12" onClick={() => setIsMenuOpen(false)}>
                     <Wallet className="h-5 w-5" />
                     Buy Tokens
                   </Button>
                 </Link>
-                <Button variant="gradient" className="w-full gap-3 h-12">
-                  <Rocket className="h-5 w-5" />
-                  Get Started
-                </Button>
               </div>
             </div>
           </div>

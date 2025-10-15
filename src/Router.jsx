@@ -2,10 +2,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import Home from './pages/Home'
 import Learn from './pages/Learn'
-import Use from './pages/Use'
 import Community from './pages/Community'
 import Developers from './pages/Developers'
 import BuyTokens from './pages/BuyTokens'
+import BecomeMiner from './pages/BecomeMiner'
 
 const router = createBrowserRouter([
   {
@@ -21,10 +21,6 @@ const router = createBrowserRouter([
         element: <Learn />,
       },
       {
-        path: "use",
-        element: <Use />,
-      },
-      {
         path: "community",
         element: <Community />,
       },
@@ -32,7 +28,10 @@ const router = createBrowserRouter([
         path: "developers",
         element: <Developers />,
       },
-
+      {
+        path: "become-miner",
+        element: <BecomeMiner />,
+      },
       {
         path: "buy-tokens",
         element: <BuyTokens />,

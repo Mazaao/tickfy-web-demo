@@ -4,28 +4,28 @@ import Logo from '../ui/logo'
 
 const footerNavigation = {
   learn: [
-    { name: 'What is Tickfy?', href: '/learn/what-is-tickfy' },
-    { name: 'NFT Tickets Guide', href: '/learn/nft-tickets' },
-    { name: 'Event Creation', href: '/learn/create-events' },
-    { name: 'Roadmap', href: '/learn/roadmap' },
+    { name: 'The Project', href: '/learn#the-project' },
+    { name: 'How it Works', href: '/learn#how-it-works' },
+    { name: 'Tokenomics', href: '/learn#tokenomics' },
+    { name: 'Why to Join', href: '/learn#why-to-join' },
   ],
-  use: [
-    { name: 'Buy Tickets', href: '/use/buy-tickets' },
-    { name: 'Create Events', href: '/use/create-events' },
-    { name: 'Manage Tickets', href: '/use/manage-tickets' },
-    { name: 'Ticket Scanner', href: '/use/scanner' },
+  developers: [
+    { name: 'Overview', href: '/developers#overview' },
+    { name: 'APIs & Integration', href: '/developers#apis' },
+    { name: 'Blockchain', href: '/developers#blockchain' },
+    { name: 'Documentation', href: '/developers' },
   ],
-  build: [
-    { name: 'Ticketing API', href: '/build/api' },
-    { name: 'Documentation', href: '/build/docs' },
-    { name: 'NFT Contracts', href: '/build/contracts' },
-    { name: 'Integration Guide', href: '/build/integration' },
+  network: [
+    { name: 'Become a Miner', href: '/become-miner' },
+    { name: 'Buy Tokens', href: '/buy-tokens' },
+    { name: 'Network Stats', href: '/' },
+    { name: 'Community', href: '/community' },
   ],
   community: [
-    { name: 'Discord', href: 'https://discord.gg/tickfy' },
-    { name: 'Event Showcase', href: '/community/events' },
-    { name: 'Partner Program', href: '/community/partners' },
-    { name: 'Blog', href: '/community/blog' },
+    { name: 'Discord Community', href: '#' },
+    { name: 'Administrators', href: '/community' },
+    { name: 'Event Showcase', href: '#' },
+    { name: 'Partner Program', href: '#' },
   ],
 }
 
@@ -84,9 +84,9 @@ export default function Footer() {
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold mb-4">Use</h3>
+              <h3 className="text-sm font-semibold mb-4">Developers</h3>
               <ul className="space-y-2">
-                {footerNavigation.use.map((item) => (
+                {footerNavigation.developers.map((item) => (
                   <li key={item.name}>
                     <Link
                       to={item.href}
@@ -100,9 +100,9 @@ export default function Footer() {
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold mb-4">Build</h3>
+              <h3 className="text-sm font-semibold mb-4">Network</h3>
               <ul className="space-y-2">
-                {footerNavigation.build.map((item) => (
+                {footerNavigation.network.map((item) => (
                   <li key={item.name}>
                     <Link
                       to={item.href}
@@ -135,7 +135,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 Tickfy. All rights reserved.
+            © 2025 Tickfy Network. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link to="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">

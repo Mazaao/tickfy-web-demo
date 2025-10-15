@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Hero from '../components/sections/Hero'
 import Section from '../components/sections/Section'
@@ -8,7 +8,7 @@ import { Badge } from '../components/ui/badge'
 import { 
   Code, Blocks, ArrowRight, Globe, Database, Key, Terminal, Download, 
   BookOpen, GitBranch, CheckCircle, Zap, Shield, Layers, Network,
-  ChevronDown, ChevronRight, Copy, FileCode, Cpu
+  ChevronDown, ChevronRight, Copy, FileCode, Cpu, MessageCircle
 } from 'lucide-react'
 
 // Section: APIs & Integration
@@ -73,6 +73,216 @@ const consensusFeatures = [
 
 // Expandable code examples
 const codeExamples = [
+  {
+    id: 'event-json-schema',
+    title: 'Event JSON Schema',
+    description: 'Complete JSON structure for Event objects',
+    language: 'json',
+    code: `{
+  "id": "event_12345abc",
+  "name": "Music Festival 2024",
+  "description": "The biggest electronic music festival of the year with international DJs",
+  "organizer": "tkfy1organizer2x3y4z5a6b7c8d9e0f1g2h3i4j5k6l7m8n9o",
+  "venue": {
+    "name": "Central Arena",
+    "address": "123 Music Street, São Paulo, SP",
+    "coordinates": {
+      "latitude": -23.5505,
+      "longitude": -46.6333
+    },
+    "capacity": 50000
+  },
+  "dateTime": {
+    "start": "2024-12-31T20:00:00Z",
+    "end": "2025-01-01T06:00:00Z",
+    "timezone": "America/Sao_Paulo"
+  },
+  "image": "https://cdn.tickfy.network/events/festival2024.jpg",
+  "category": "Music",
+  "tags": ["electronic", "festival", "new-year"],
+  
+  "ticketing": {
+    "maxTickets": 50000,
+    "batchPrice": 250,
+    "currency": "TKFYT",
+    "ticketTypes": [
+      {
+        "id": "general",
+        "name": "General Admission",
+        "price": 200,
+        "quantity": 40000,
+        "benefits": ["Event access", "Digital certificate"]
+      },
+      {
+        "id": "vip", 
+        "name": "VIP Experience",
+        "price": 500,
+        "quantity": 5000,
+        "benefits": ["Premium area", "Open bar", "Meet & Greet"]
+      },
+      {
+        "id": "backstage",
+        "name": "Backstage Pass",
+        "price": 1000,
+        "quantity": 500,
+        "benefits": ["Backstage access", "Artist photos", "Exclusive merchandise"]
+      }
+    ],
+    "mintFee": 1000,
+    "totalMinted": 0,
+    "totalSold": 0
+  },
+  
+  "trading": {
+    "minTradeForceBatchPrice": true,
+    "transferable": true,
+    "resaleRoyalty": 5,
+    "customFees": [
+      {
+        "recipient": "tkfy1organizer2x3y4z5a6b7c8d9e0f1g2h3i4j5k6l7m8n9o",
+        "percentage": 3,
+        "description": "Organizer fee"
+      },
+      {
+        "recipient": "tkfy1venue9x8y7z6a5b4c3d2e1f0g9h8i7j6k5l4m3n2o1p",
+        "percentage": 2,
+        "description": "Venue fee"
+      }
+    ]
+  },
+  
+  "access": {
+    "requireWhitelist": false,
+    "authorizedScanners": [
+      "tkfy1scanner1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s",
+      "tkfy1scanner2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t"
+    ],
+    "checkInEnabled": true
+  },
+  
+  "blockchain": {
+    "contractAddress": "tkfy1contract5x4y3z2a1b0c9d8e7f6g5h4i3j2k1l0m9n8o",
+    "createdAt": "2024-01-15T10:30:00Z",
+    "updatedAt": "2024-01-15T10:30:00Z",
+    "status": "active",
+    "network": "tickfy-mainnet"
+  }
+}`
+  },
+  {
+    id: 'ticket-json-schema',
+    title: 'Ticket NFT JSON Schema', 
+    description: 'Complete JSON structure for Ticket NFT objects',
+    language: 'json',
+    code: `{
+  "tokenId": "ticket_67890def",
+  "eventId": "event_12345abc",
+  "name": "Music Festival 2024 - VIP Experience #1234",
+  "description": "VIP ticket for Music Festival 2024 with premium benefits",
+  "image": "https://cdn.tickfy.network/tickets/festival2024-vip-1234.png",
+  
+  "attributes": [
+    {
+      "trait_type": "Event Name",
+      "value": "Music Festival 2024"
+    },
+    {
+      "trait_type": "Ticket Type", 
+      "value": "VIP Experience"
+    },
+    {
+      "trait_type": "Serial Number",
+      "value": 1234
+    },
+    {
+      "trait_type": "Date",
+      "value": "2024-12-31"
+    },
+    {
+      "trait_type": "Venue",
+      "value": "Central Arena"
+    },
+    {
+      "trait_type": "Original Price",
+      "value": "500 TKFYT"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Rare"
+    }
+  ],
+  
+  "ownership": {
+    "currentOwner": "tkfy1owner9a8b7c6d5e4f3g2h1i0j9k8l7m6n5o4p3q2r1s0",
+    "originalOwner": "tkfy1buyer1z2y3x4w5v6u7t8s9r0q1p2o3n4m5l6k7j8i9h0",
+    "mintedTo": "tkfy1buyer1z2y3x4w5v6u7t8s9r0q1p2o3n4m5l6k7j8i9h0",
+    "transferHistory": [
+      {
+        "from": "tkfy1buyer1z2y3x4w5v6u7t8s9r0q1p2o3n4m5l6k7j8i9h0",
+        "to": "tkfy1owner9a8b7c6d5e4f3g2h1i0j9k8l7m6n5o4p3q2r1s0",
+        "timestamp": "2024-11-15T14:22:00Z",
+        "price": 750,
+        "transactionHash": "0xabc123def456..."
+      }
+    ]
+  },
+  
+  "ticketing": {
+    "ticketType": "vip",
+    "originalPrice": 500,
+    "currentPrice": 750,
+    "benefits": [
+      "Premium area access",
+      "Open bar included", 
+      "Meet & Greet with artists",
+      "VIP parking",
+      "Exclusive merchandise"
+    ],
+    "seat": {
+      "section": "VIP-A",
+      "row": "03",
+      "number": "15"
+    }
+  },
+  
+  "validation": {
+    "qrCode": "https://api.tickfy.network/qr/ticket_67890def",
+    "verificationHash": "0x9f2e8d7c6b5a4958372615049382716253947162894073",
+    "isValid": true,
+    "transferable": true,
+    "status": "active"
+  },
+  
+  "usage": {
+    "used": false,
+    "usedAt": null,
+    "usedBy": null,
+    "checkInLocation": null,
+    "scanner": null
+  },
+  
+  "blockchain": {
+    "contractAddress": "tkfy1nft8x7y6z5a4b3c2d1e0f9g8h7i6j5k4l3m2n1o0p",
+    "mintedAt": "2024-01-15T11:45:00Z",
+    "mintTransaction": "0xdef789abc456...",
+    "mintedBy": "tkfy1organizer2x3y4z5a6b7c8d9e0f1g2h3i4j5k6l7m8n9o",
+    "network": "tickfy-mainnet",
+    "standard": "CW-721",
+    "royalty": {
+      "percentage": 5,
+      "recipient": "tkfy1organizer2x3y4z5a6b7c8d9e0f1g2h3i4j5k6l7m8n9o"
+    }
+  },
+  
+  "metadata": {
+    "external_url": "https://app.tickfy.network/ticket/ticket_67890def",
+    "animation_url": "https://cdn.tickfy.network/animations/ticket_67890def.mp4",
+    "background_color": "6B46C1",
+    "created_date": "2024-01-15T11:45:00Z",
+    "updated_date": "2024-11-15T14:22:00Z"
+  }
+}`
+  },
   {
     id: 'ticket-validation',
     title: 'Ticket Validation',
@@ -468,6 +678,12 @@ const CodeExample = ({ example }) => {
 
 export default function Developers() {
   const location = useLocation()
+  const navigate = useNavigate()
+
+  const handleSupportClick = () => {
+    navigate('/community')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   useEffect(() => {
     // Scroll to section based on hash, or top if no hash
@@ -488,7 +704,20 @@ export default function Developers() {
           subtitle="Developers"
           title="Build on Tickfy Network"
           description="Complete tools, ready-to-use APIs and technical documentation to develop applications with NFT tickets."
-        />
+        >
+          <div className="mt-16 text-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button variant="outline" size="lg" className="text-lg px-8 bg-white hover:bg-gray-100 border border-gray-200">
+                <Download className="mr-2 h-5 w-5" />
+                Download SDK
+              </Button>
+              <Button size="lg" className="text-lg px-8">
+                Get API Key
+                <Key className="ml-2 h-5 w-5" />
+              </Button>
+            </div>
+          </div>
+        </Hero>
 
         <Section
           title="Why Develop on Tickfy?"
@@ -627,23 +856,11 @@ export default function Developers() {
           subtitle="Quick Setup"
           description="Everything ready for you to start today"
         >
-          <div className="text-center space-y-6">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg px-8">
-                Get API Key
-                <Key className="ml-2 h-5 w-5" />
-              </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8">
-                <Download className="mr-2 h-5 w-5" />
-                Download SDK
-              </Button>
-            </div>
-            <div className="flex flex-wrap justify-center gap-2">
-              <Badge variant="outline">APIs RESTful</Badge>
-              <Badge variant="outline">GraphQL</Badge>
-              <Badge variant="outline">WebSockets</Badge>
-              <Badge variant="outline">SDKs Multi-linguagem</Badge>
-            </div>
+          <div className="text-center">
+            <Button size="lg" className="text-lg px-8" onClick={handleSupportClick}>
+              <MessageCircle className="mr-2 h-5 w-5" />
+              Support and Help
+            </Button>
           </div>
         </Section>
       </div>

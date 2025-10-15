@@ -47,8 +47,8 @@ const features = [
 const stats = [
   { value: '10M+', label: 'Tickets Minted', description: 'NFT tickets created' },
   { value: '50K+', label: 'Events Hosted', description: 'Successful events' },
-  { value: '99.9%', label: 'Fraud Prevention', description: 'Secure transactions' },
-  { value: '1M+', label: 'Happy Attendees', description: 'Satisfied customers' }
+  { value: '167', label: 'Active Validators', description: 'Securing the network' },
+  { value: '99.9%', label: 'Fraud Prevention', description: 'Secure transactions' }
 ]
 
 export default function Home() {
@@ -89,69 +89,31 @@ export default function Home() {
         <FeatureGrid features={features} columns={3} />
       </Section>
 
-      {/* Technology Section */}
+      {/* Start Here Section */}
       <Section
-        title="Revolutionary NFT Ticketing"
-        subtitle="Blockchain Innovation"
-        description="Built on advanced blockchain technology specifically designed for secure, transparent event ticketing."
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
-                  <TrendingUp className="w-4 h-4 text-primary" />
-                </div>
-                <h3 className="text-xl font-semibold">NFT Ticket Minting</h3>
-              </div>
-              <p className="text-muted-foreground">
-                Each ticket is minted as a unique NFT with immutable ownership records and anti-counterfeiting protection.
-              </p>
-            </div>
-            
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-accent/30 rounded-lg flex items-center justify-center">
-                  <Rocket className="w-4 h-4 text-accent" />
-                </div>
-                <h3 className="text-xl font-semibold">Smart Contract Automation</h3>
-              </div>
-              <p className="text-muted-foreground">
-                Automated ticket sales, transfers, and royalty distributions through secure, audited smart contracts.
-              </p>
-            </div>
-
-            <Button variant="gradient" className="mt-8">
-              Mint Your First Ticket
-            </Button>
-          </div>
-
-          <div className="relative">
-            <div className="aspect-square bg-primary/10 rounded-2xl flex items-center justify-center border border-accent/20">
-              <div className="text-center">
-                <div className="text-6xl font-bold gradient-text mb-4">0%</div>
-                <div className="text-lg text-muted-foreground">Fraud Rate</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* CTA Section */}
-      <Section
-        title="Ready to Transform Your Events?"
-        subtitle="Start Today"
-        description="Join thousands of event organizers already revolutionizing ticketing with Tickfy NFTs."
+        title="Start Your Journey"
+        subtitle="Begin Here"
+        description="Discover how Tickfy Network is revolutionizing the events world with blockchain technology."
         background="gradient"
         className="text-center"
       >
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
-          <Button variant="gradient" size="lg" className="w-full sm:w-auto">
-            Create Event
-          </Button>
-          <Button variant="outline" size="lg" className="w-full sm:w-auto">
-            Buy Tickets
-          </Button>
+        <div className="max-w-2xl mx-auto">
+          <div className="mb-8">
+            <p className="text-lg text-muted-foreground mb-6">
+              Understand how the project works, the technology behind NFT tickets, 
+              and how you can be part of this revolution.
+            </p>
+          </div>
+          <div className="flex justify-center">
+            <Button 
+              variant="gradient" 
+              size="lg" 
+              onClick={() => window.location.href = '/learn#the-project'}
+            >
+              <Rocket className="mr-2 h-5 w-5" />
+              Start from Here
+            </Button>
+          </div>
         </div>
       </Section>
       </div>
