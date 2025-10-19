@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import Hero from '../components/sections/Hero'
 import Section from '../components/sections/Section'
 import StatsGrid from '../components/sections/StatsGrid'
+import Logo from '../components/ui/logo'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button'
 import { Badge } from '../components/ui/badge'
@@ -10,6 +11,33 @@ import {
   Shield, Zap, Coins, CheckCircle, ArrowRight, Globe, Target, DollarSign,
   Building2, Code, Pickaxe, Package, Network, TrendingUp, Users
 } from 'lucide-react'
+
+// Componente de logo normal para usar como ícone
+const TickfyIcon = ({ className }) => (
+  <img 
+    src="/logo.svg" 
+    alt="Tickfy" 
+    className={className}
+    onError={(e) => {
+      e.target.onerror = null;
+      e.target.src = '/logo.png';
+    }}
+  />
+)
+
+// Componente de logo rotacionada 90 graus
+const TickfyIconRotated = ({ className }) => (
+  <img 
+    src="/logo.svg" 
+    alt="Tickfy" 
+    className={className}
+    style={{ transform: 'rotate(90deg)' }}
+    onError={(e) => {
+      e.target.onerror = null;
+      e.target.src = '/logo.png';
+    }}
+  />
+)
 
 // Componente de texto animado com efeito scramble
 function ScrambleText({ text, className = '' }) {
@@ -279,7 +307,7 @@ const tokens = [
   {
     name: 'TKFYT',
     subtitle: 'USDT Backed',
-    icon: Coins,
+    icon: TickfyIconRotated,
     color: 'green',
     description: 'Main token for ticket transactions',
     features: [
@@ -298,7 +326,7 @@ const tokens = [
   {
     name: 'TKFY',
     subtitle: 'Stake & Governance',
-    icon: Shield,
+    icon: TickfyIcon,
     color: 'purple', 
     description: 'Network security and PoS validation token',
     features: [
