@@ -4,10 +4,10 @@ import Logo from '../ui/logo'
 
 const footerNavigation = {
   learn: [
-    { name: 'The Project', href: '/learn#the-project' },
-    { name: 'How it Works', href: '/learn#how-it-works' },
-    { name: 'Tokenomics', href: '/learn#tokenomics' },
-    { name: 'Why to Join', href: '/learn#why-to-join' },
+    { name: 'The Project', href: '/#the-project' },
+    { name: 'How it Works', href: '/#how-it-works' },
+    { name: 'Tokenomics', href: '/#tokenomics' },
+    { name: 'Why to Join', href: '/#why-to-join' },
   ],
   developers: [
     { name: 'Overview', href: '/developers#overview' },

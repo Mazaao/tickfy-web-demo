@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Hero from '../components/sections/Hero'
+import ScrambleText from '../components/ui/ScrambleText'
 import Section from '../components/sections/Section'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button'
@@ -255,7 +256,7 @@ export default function BecomeMiner() {
     <>
       <div className="pt-16">
         <Hero
-          subtitle="Become a Miner"
+          subtitle={<ScrambleText text="Become a Miner" />}
           title="Secure the Network, Earn Rewards"
           description="Join the Tickfy Network as a validator and earn rewards by securing transactions and maintaining network consensus."
         />
@@ -263,7 +264,7 @@ export default function BecomeMiner() {
         {/* Section 1: Why Become a Validator */}
         <Section
           title="Why Become a Validator?"
-          subtitle="Earn While Securing"
+          subtitle={<ScrambleText text="Earn While Securing" />}
           description="Validators are the backbone of Tickfy Network, ensuring security and earning rewards"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
@@ -338,7 +339,7 @@ export default function BecomeMiner() {
         {/* Section 2: Earnings Calculator */}
         <Section
           title="Earnings Calculator"
-          subtitle="Potential Returns"
+          subtitle={<ScrambleText text="Potential Returns" />}
           description="Estimated earnings with different stake amounts (based on average network activity)"
           background="muted"
         >
@@ -574,7 +575,7 @@ export default function BecomeMiner() {
         {/* Section 4: Get Started */}
         <Section
           title="Ready to Start?"
-          subtitle="Choose Your Path"
+          subtitle={<ScrambleText text="Choose Your Path" />}
           description="Whether you want to run your own validator or delegate, we'll guide you through the process"
           background="muted"
         >

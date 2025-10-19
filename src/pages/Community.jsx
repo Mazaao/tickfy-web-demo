@@ -1,4 +1,5 @@
 import Hero from '../components/sections/Hero'
+import ScrambleText from '../components/ui/ScrambleText'
 import Section from '../components/sections/Section'
 import FeatureGrid from '../components/sections/FeatureGrid'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
@@ -64,7 +65,7 @@ export default function Community() {
     <>
       <div className="pt-16">
         <Hero
-        subtitle="Join Our Community"
+        subtitle={<ScrambleText text="Join Our Community" />}
         title="Connect with Event Innovators"
         description="Be part of the global Tickfy community revolutionizing event ticketing and experiences."
       />
@@ -72,7 +73,7 @@ export default function Community() {
       {/* Administrators Section */}
       <Section
         title="Community Administrators"
-        subtitle="Meet Our Leaders"
+        subtitle={<ScrambleText text="Meet Our Leaders" />}
         description="The wise guardians who guide our community and ensure the network's prosperity."
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -110,7 +111,7 @@ export default function Community() {
 
       <Section
         title="Community Channels"
-        subtitle="Stay Connected"
+        subtitle={<ScrambleText text="Stay Connected" />}
         description="Join our vibrant community across multiple platforms and channels."
         background="muted"
       >

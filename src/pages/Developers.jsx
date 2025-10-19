@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Hero from '../components/sections/Hero'
+import ScrambleText from '../components/ui/ScrambleText'
 import Section from '../components/sections/Section'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button'
@@ -701,7 +702,7 @@ export default function Developers() {
     <>
       <div className="pt-16" id="overview">
         <Hero
-          subtitle="Developers"
+          subtitle={<ScrambleText text="Developers" />}
           title="Build on Tickfy Network"
           description="Complete tools, ready-to-use APIs and technical documentation to develop applications with NFT tickets."
         >
@@ -719,52 +720,13 @@ export default function Developers() {
           </div>
         </Hero>
 
-        <Section
-          title="Why Develop on Tickfy?"
-          subtitle="Technical Advantages"
-          description="Exclusive benefits for developers"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="text-center">
-              <CardHeader>
-                <CardTitle>Complete APIs</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  REST, GraphQL, WebSockets and SDKs for all popular languages
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center">
-              <CardHeader>
-                <CardTitle>Optimized Blockchain</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Network specialized in events with low fees and high performance
-                </CardDescription>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center">
-              <CardHeader>
-                <CardTitle>Complete Documentation</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>
-                  Guides, tutorials, code examples and active technical support
-                </CardDescription>
-              </CardContent>
-            </Card>
-          </div>
-        </Section>
+        
 
         {/* Section: APIs & Integration */}
         <Section
           id="apis"
           title="APIs & Integration"
-          subtitle="SDKs and Tools"
+          subtitle={<ScrambleText text="SDKs and Tools" />}
           description="Integrate NFT tickets into any application with our complete APIs"
           background="muted"
         >
@@ -806,7 +768,7 @@ export default function Developers() {
         <Section
           id="blockchain"
           title="Blockchain & Contracts"
-          subtitle="Technical Specifications"
+          subtitle={<ScrambleText text="Technical Specifications" />}
           description="Built on Cosmos SDK with optimized smart contracts"
         >
           <div className="space-y-8">
@@ -840,7 +802,7 @@ export default function Developers() {
         {/* Section: Code Examples */}
         <Section
           title="Code Examples"
-          subtitle="For Ticketing Agencies"
+          subtitle={<ScrambleText text="For Ticketing Agencies" />}
           description="Ready-to-use code to implement essential features"
           background="gradient"
         >
@@ -853,7 +815,7 @@ export default function Developers() {
 
         <Section
           title="Start Developing"
-          subtitle="Quick Setup"
+          subtitle={<ScrambleText text="Quick Setup" />}
           description="Everything ready for you to start today"
         >
           <div className="text-center">

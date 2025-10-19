@@ -154,7 +154,7 @@ const Features = () => {
             className="gap-2 group"
             asChild
           >
-            <Link to="/learn">
+            <Link to="/">
               Discover More Features
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Link>

@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 import Home from './pages/Home'
-import Learn from './pages/Learn'
 import Community from './pages/Community'
 import Developers from './pages/Developers'
 import BuyTokens from './pages/BuyTokens'
@@ -15,10 +14,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-      },
-      {
-        path: "learn",
-        element: <Learn />,
       },
       {
         path: "community",

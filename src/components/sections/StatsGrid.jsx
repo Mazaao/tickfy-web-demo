@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion'
 
-export default function StatsGrid({ stats, columns = 4 }) {
+export default function StatsGrid({ stats, columns = 4, CountingComponent, LiveCounterComponent }) {
+  // Detecta automaticamente o número de stats se columns não for especificado explicitamente
+  const actualColumns = stats.length === 3 ? 3 : columns
+  
   const columnClasses = {
     2: 'grid-cols-1 md:grid-cols-2',
-    3: 'grid-cols-1 md:grid-cols-3',
+    3: 'grid-cols-1 md:grid-cols-3 max-w-4xl mx-auto',
     4: 'grid-cols-2 lg:grid-cols-4',
   }
 
@@ -34,7 +37,7 @@ export default function StatsGrid({ stats, columns = 4 }) {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className={`grid gap-6 ${columnClasses[columns]}`}
+      className={`grid gap-6 ${columnClasses[actualColumns]}`}
     >
       {stats.map((stat, index) => (
         <motion.div
@@ -43,7 +46,13 @@ export default function StatsGrid({ stats, columns = 4 }) {
           className="text-center p-6 rounded-lg bg-card/50 border border-accent/20 backdrop-blur-sm"
         >
           <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">
-            {stat.value}
+            {stat.isLive && LiveCounterComponent ? (
+              <LiveCounterComponent {...stat.liveConfig} />
+            ) : CountingComponent ? (
+              <CountingComponent value={stat.value} />
+            ) : (
+              stat.value
+            )}
           </div>
           <div className="text-sm text-muted-foreground font-medium">
             {stat.label}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import Hero from '../components/sections/Hero'
+import ScrambleText from '../components/ui/ScrambleText'
 import Section from '../components/sections/Section'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button'
@@ -145,14 +146,13 @@ export default function BuyTokens() {
     <>
       <div className="pt-16" id="overview">
         <Hero
-          subtitle="Buy Tokens"
+          subtitle={<ScrambleText text="Buy Tokens" />}
           title="Acquire TKFY and TKFYT"
           description="Calculator and complete guide to buy Tickfy Network tokens with USDT."
         />
 
         <Section
           title="Token Calculator"
-          subtitle="USDT ↔ Token Conversion"
           description="Calculate how much it costs to buy tokens or how much you receive selling"
         >
           <div className="max-w-2xl mx-auto">
@@ -250,7 +250,7 @@ export default function BuyTokens() {
 
         <Section
           title="Treasury Address"
-          subtitle="Where to Send USDT"
+            subtitle={<ScrambleText text="Where to Send USDT" />}
           description="Official treasury address for token purchase"
           background="muted"
         >
@@ -301,7 +301,7 @@ export default function BuyTokens() {
 
         <Section
           title="Complete Tutorial"
-          subtitle="Learn More"
+          subtitle={<ScrambleText text="Learn More" />}
           description="For detailed instructions on how to use the platform"
           background="gradient"
         >
@@ -311,7 +311,7 @@ export default function BuyTokens() {
                 For a complete guide on how to buy, sell, use tokens and explore all platform features, visit our dedicated section.
               </p>
             </div>
-            <Link to="/learn">
+            <Link to="/">
               <Button size="lg" className="text-lg px-8">
                 View Complete Platform Guide
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -322,7 +322,7 @@ export default function BuyTokens() {
 
         <Section
           title="Need Help?"
-          subtitle="Support and Documentation"
+            subtitle={<ScrambleText text="Support and Documentation" />}
           description="Additional resources to buy and manage tokens"
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">

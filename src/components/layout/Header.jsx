@@ -17,12 +17,12 @@ import { cn } from '../../lib/utils'
 const navigation = [
   { 
     name: 'Learn and Use', 
-    href: '/learn',
+    href: '/',
     items: [
-      { name: 'The Project', href: '/learn#the-project', description: 'How Tickfy Network was born and its purpose' },
-      { name: 'How it Works', href: '/learn#how-it-works', description: 'Step by step guide to use the platform' },
-      { name: 'Tokenomics', href: '/learn#tokenomics', description: 'Tokens, conversion rates, fees and mining' },
-      { name: 'Why to Join', href: '/learn#why-to-join', description: 'Benefits for producers, agencies and customers' }
+      { name: 'The Project', href: '/#the-project', description: 'How Tickfy Network was born and its purpose' },
+      { name: 'How it Works', href: '/#how-it-works', description: 'Step by step guide to use the platform' },
+      { name: 'Tokenomics', href: '/#tokenomics', description: 'Tokens, conversion rates, fees and mining' },
+      { name: 'Why to Join', href: '/#why-to-join', description: 'Benefits for producers, agencies and customers' }
     ]
   },
   { 
@@ -42,6 +42,20 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
+
+  // Determine which top-level group is active based on current route
+  const pathname = location.pathname
+  const isDevelopers = pathname.startsWith('/developers')
+  const isCommunity = pathname.startsWith('/community')
+  const isLearnAndUse = !isDevelopers && !isCommunity // default group for home and general pages
+  const isBecomeMiner = pathname.startsWith('/become-miner')
+  const isLearnRelated = (
+    pathname === '/' ||
+    pathname.startsWith('/learn') ||
+    pathname.startsWith('/build') ||
+    pathname.startsWith('/buy-tokens') ||
+    pathname.startsWith('/become-miner')
+  )
 
   useEffect(() => {
     const handleScroll = () => {
@@ -94,10 +108,24 @@ export default function Header() {
           <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList>
               {navigation.map((item) => (
-                <NavigationMenuItem key={item.name}>
+                <NavigationMenuItem 
+                  key={item.name}
+                  className={cn(
+                    (item.name === 'Learn and Use' && (isLearnAndUse || isLearnRelated)) && 'text-primary',
+                    (item.name === 'Developers' && isDevelopers) && 'text-primary',
+                    (item.name === 'Community' && isCommunity) && 'text-primary'
+                  )}
+                >
                   {item.items ? (
                     <>
-                      <NavigationMenuTrigger className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 focus:bg-transparent focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-transparent data-[state=open]:bg-gray-100 dark:data-[state=open]:bg-gray-800">
+                      <NavigationMenuTrigger 
+                        data-active={(item.name === 'Learn and Use' && (isLearnAndUse || isLearnRelated)) || (item.name === 'Developers' && isDevelopers) ? '' : undefined}
+                        className={cn(
+                        "group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 focus:bg-transparent focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-transparent data-[state=open]:bg-gray-100 dark:data-[state=open]:bg-gray-800",
+                        (item.name === 'Learn and Use' && (isLearnAndUse || isLearnRelated)) && 'text-primary data-[state=open]:text-primary data-[active]:text-primary',
+                        (item.name === 'Developers' && isDevelopers) && 'text-primary data-[state=open]:text-primary data-[active]:text-primary'
+                        )}
+                      >
                         {item.name}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
@@ -123,7 +151,10 @@ export default function Header() {
                     <NavigationMenuLink asChild>
                       <Link
                         to={item.href}
-                        className="inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 focus:bg-transparent focus:outline-none"
+                        className={cn(
+                          "inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 focus:bg-transparent focus:outline-none",
+                          item.name === 'Community' && isCommunity && 'text-primary'
+                        )}
                       >
                         {item.name}
                       </Link>
@@ -174,7 +205,12 @@ export default function Header() {
                 <div key={item.name}>
                   <Link
                     to={item.href}
-                    className="block px-4 py-3 rounded-lg text-base font-medium transition-colors text-foreground hover:bg-gray-100 dark:hover:bg-gray-800"
+                    className={cn(
+                      "block px-4 py-3 rounded-lg text-base font-medium transition-colors text-foreground hover:bg-gray-100 dark:hover:bg-gray-800",
+                      item.name === 'Learn and Use' && (isLearnAndUse || isLearnRelated) && 'text-primary',
+                      item.name === 'Developers' && isDevelopers && 'text-primary',
+                      item.name === 'Community' && isCommunity && 'text-primary'
+                    )}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
