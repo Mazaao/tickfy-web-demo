@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Hero from '../components/sections/Hero'
 import ScrambleText from '../components/ui/ScrambleText'
@@ -6,6 +6,13 @@ import Section from '../components/sections/Section'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button'
 import { Badge } from '../components/ui/badge'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../components/ui/select'
 import { 
   MessageCircle, ThumbsUp, Clock, User, TrendingUp, 
   Plus, X, Send, Eye, MessageSquare
@@ -106,6 +113,10 @@ export default function Forum() {
     content: ''
   })
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
   const filteredPosts = selectedCategory === 'All' 
     ? forumPosts 
     : forumPosts.filter(post => post.category === selectedCategory)
@@ -124,17 +135,18 @@ export default function Forum() {
         <Section>
           <div className="flex justify-between items-center gap-4 mb-8">
             {/* Mobile: Select dropdown */}
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="sm:hidden flex-1 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-            >
-              {categories.map((category) => (
-                <option key={category.name} value={category.name}>
-                  {category.name} ({category.count})
-                </option>
-              ))}
-            </select>
+            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <SelectTrigger className="sm:hidden flex-1">
+                <SelectValue placeholder="Select category" />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((category) => (
+                  <SelectItem key={category.name} value={category.name}>
+                    {category.name} ({category.count})
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
 
             {/* Desktop: Buttons */}
             <div className="hidden sm:flex gap-2 flex-wrap">
@@ -254,18 +266,22 @@ export default function Forum() {
                 </div>
                 <div>
                   <label className="text-sm font-medium mb-2 block">Category</label>
-                  <select
+                  <Select
                     value={newPost.category}
-                    onChange={(e) => setNewPost({ ...newPost, category: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    onValueChange={(value) => setNewPost({ ...newPost, category: value })}
                   >
-                    <option value="Development">Development</option>
-                    <option value="Mining">Mining</option>
-                    <option value="Support">Support</option>
-                    <option value="Best Practices">Best Practices</option>
-                    <option value="Feature Request">Feature Request</option>
-                    <option value="Security">Security</option>
-                  </select>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Development">Development</SelectItem>
+                      <SelectItem value="Mining">Mining</SelectItem>
+                      <SelectItem value="Support">Support</SelectItem>
+                      <SelectItem value="Best Practices">Best Practices</SelectItem>
+                      <SelectItem value="Feature Request">Feature Request</SelectItem>
+                      <SelectItem value="Security">Security</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
                 <div>
                   <label className="text-sm font-medium mb-2 block">Content</label>

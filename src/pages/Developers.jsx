@@ -754,70 +754,73 @@ export default function Developers() {
                     {/* Connection line to next step */}
                     {index < sdkFeatures.length - 1 && (
                       <>
-                        {/* Múltiplas linhas de partículas espalhadas pela largura do card */}
-                        {/* Linha 1 - 20% */}
-                        <div 
-                          className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none"
-                          style={{ left: '20%' }}
-                        >
-                          <div 
-                            className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-transparent via-purple-500 to-transparent"
-                            style={{
-                              animation: 'flowDown 2s ease-in-out infinite',
-                              animationDelay: `${index * 5}s`,
-                              left: '-3px',
-                              filter: 'blur(1px)'
-                            }}
-                          />
-                        </div>
+                        {/* Partículas únicas para cada espaço entre cards */}
+                        
+                        {/* ESPAÇO 0: Entre Install e Configure (index === 0) */}
+                        {index === 0 && (
+                          <>
+                            <div className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none" style={{ left: '18%' }}>
+                              <div className="absolute w-2.5 h-2.5 rounded-full bg-gradient-to-r from-transparent via-purple-500 to-transparent"
+                                style={{ animation: 'flowDown 2.2s ease-in-out infinite', animationDelay: '0s', left: '-4px', filter: 'blur(1.3px)' }} />
+                            </div>
+                            <div className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none" style={{ left: '38%' }}>
+                              <div className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-transparent via-blue-400 to-transparent"
+                                style={{ animation: 'flowDown 3.1s ease-in-out infinite', animationDelay: '0.7s', left: '-2.5px', filter: 'blur(0.8px)' }} />
+                            </div>
+                            <div className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none" style={{ left: '62%' }}>
+                              <div className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-transparent via-violet-400 to-transparent"
+                                style={{ animation: 'flowDown 1.8s ease-in-out infinite', animationDelay: '1.4s', left: '-3px', filter: 'blur(1.5px)' }} />
+                            </div>
+                            <div className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none" style={{ left: '82%' }}>
+                              <div className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-transparent via-pink-300 to-transparent"
+                                style={{ animation: 'flowDown 2.6s ease-in-out infinite', animationDelay: '2.1s', left: '-2.5px', filter: 'blur(0.6px)' }} />
+                            </div>
+                          </>
+                        )}
 
-                        {/* Linha 2 - 40% */}
-                        <div 
-                          className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none"
-                          style={{ left: '40%' }}
-                        >
-                          <div 
-                            className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-transparent via-purple-600 to-transparent"
-                            style={{
-                              animation: 'flowDown 1.4s ease-in-out infinite',
-                              animationDelay: `${index * 5}s`,
-                              left: '-3px',
-                              filter: 'blur(1px)'
-                            }}
-                          />
-                        </div>
+                        {/* ESPAÇO 1: Entre Configure e Implement (index === 1) */}
+                        {index === 1 && (
+                          <>
+                            <div className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none" style={{ left: '22%' }}>
+                              <div className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent"
+                                style={{ animation: 'flowDown 2.9s ease-in-out infinite', animationDelay: '0.3s', left: '-3px', filter: 'blur(1.1px)' }} />
+                            </div>
+                            <div className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none" style={{ left: '44%' }}>
+                              <div className="absolute w-3 h-3 rounded-full bg-gradient-to-r from-transparent via-indigo-400 to-transparent"
+                                style={{ animation: 'flowDown 1.6s ease-in-out infinite', animationDelay: '1.1s', left: '-5px', filter: 'blur(0.9px)' }} />
+                            </div>
+                            <div className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none" style={{ left: '58%' }}>
+                              <div className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-transparent via-purple-300 to-transparent"
+                                style={{ animation: 'flowDown 3.4s ease-in-out infinite', animationDelay: '1.8s', left: '-2.5px', filter: 'blur(1.4px)' }} />
+                            </div>
+                            <div className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none" style={{ left: '78%' }}>
+                              <div className="absolute w-2.5 h-2.5 rounded-full bg-gradient-to-r from-transparent via-blue-500 to-transparent"
+                                style={{ animation: 'flowDown 2.3s ease-in-out infinite', animationDelay: '2.5s', left: '-4px', filter: 'blur(1.6px)' }} />
+                            </div>
+                          </>
+                        )}
 
-                        {/* Linha 3 - 60% */}
-                        <div 
-                          className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none"
-                          style={{ left: '60%' }}
-                        >
-                          <div 
-                            className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-transparent via-purple-500 to-transparent"
-                            style={{
-                              animation: 'flowDown 1s ease-in-out infinite',
-                              animationDelay: `${index * 5}s`,
-                              left: '-2.5px',
-                              filter: 'blur(1px)'
-                            }}
-                          />
-                        </div>
-
-                        {/* Linha 4 - 80% */}
-                        <div 
-                          className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none"
-                          style={{ left: '80%' }}
-                        >
-                          <div 
-                            className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-transparent via-purple-500 to-transparent"
-                            style={{
-                              animation: 'flowDown 1.8s ease-in-out infinite',
-                              animationDelay: `${index * 5}s`,
-                              left: '-2.5px',
-                              filter: 'blur(1px)'
-                            }}
-                          />
-                        </div>
+                        {/* ESPAÇO 2: Entre Implement e Test (index === 2) */}
+                        {index === 2 && (
+                          <>
+                            <div className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none" style={{ left: '16%' }}>
+                              <div className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-transparent via-violet-500 to-transparent"
+                                style={{ animation: 'flowDown 2.1s ease-in-out infinite', animationDelay: '0.5s', left: '-3px', filter: 'blur(1.2px)' }} />
+                            </div>
+                            <div className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none" style={{ left: '36%' }}>
+                              <div className="absolute w-2.5 h-2.5 rounded-full bg-gradient-to-r from-transparent via-pink-400 to-transparent"
+                                style={{ animation: 'flowDown 3.2s ease-in-out infinite', animationDelay: '1.3s', left: '-4px', filter: 'blur(0.7px)' }} />
+                            </div>
+                            <div className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none" style={{ left: '64%' }}>
+                              <div className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-transparent via-indigo-300 to-transparent"
+                                style={{ animation: 'flowDown 1.7s ease-in-out infinite', animationDelay: '2s', left: '-2.5px', filter: 'blur(1.7px)' }} />
+                            </div>
+                            <div className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none" style={{ left: '84%' }}>
+                              <div className="absolute w-3 h-3 rounded-full bg-gradient-to-r from-transparent via-purple-400 to-transparent"
+                                style={{ animation: 'flowDown 2.8s ease-in-out infinite', animationDelay: '2.7s', left: '-5px', filter: 'blur(1px)' }} />
+                            </div>
+                          </>
+                        )}
                       </>
                     )}
 

@@ -765,11 +765,12 @@ export default function Home() {
               {howItWorks.map((step, index) => (
                 <div key={index} className="relative">
                   <Card className="border-2 hover:shadow-lg transition-shadow h-full">
+                    {/* Número pequeno no canto superior direito */}
+                    <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-xs z-10">
+                      {step.step}
+                    </div>
                     <CardHeader>
                       <div className="mb-4">
-                        <div className="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-2xl mx-auto mb-4 relative z-20 shadow-lg">
-                          {step.step}
-                        </div>
                         <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
                           <step.icon className="h-6 w-6 text-primary" />
                         </div>

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 import Hero from '../components/sections/Hero'
 import ScrambleText from '../components/ui/ScrambleText'
 import Section from '../components/sections/Section'
@@ -63,6 +64,10 @@ const administrators = [
 ]
 
 export default function Community() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
   return (
     <>
       <div className="pt-16">
