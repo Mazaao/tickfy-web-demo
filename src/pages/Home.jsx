@@ -427,15 +427,15 @@ function TokenCards({ tokens }) {
     if (expandedToken !== index) {
       setShowContent(false) // Esconde o conteúdo imediatamente
       setExpandedToken(index)
-      // Mostra o conteúdo após a animação de width (500ms)
+      // Mostra o conteúdo após a animação de width (0.5ms)
       setTimeout(() => {
         setShowContent(true)
-      }, 500)
+      }, 0.5)
     }
   }
 
   return (
-    <div className="flex gap-4 mb-12 max-w-4xl mx-auto">
+    <div className="flex flex-col md:flex-row gap-4 mb-12 max-w-4xl mx-auto">
       {tokens.map((token, index) => {
         const isExpanded = expandedToken === index
         
@@ -445,8 +445,8 @@ function TokenCards({ tokens }) {
             onClick={() => handleCardClick(index)}
             className={`border-2 transition-all duration-500 relative cursor-pointer ${
               isExpanded 
-                ? 'flex-1 border-purple-600 shadow-xl shadow-purple-600/20' 
-                : 'w-44 border-gray-300 dark:border-gray-700 hover:border-purple-400 opacity-80'
+                ? 'md:flex-1 border-purple-600 shadow-xl shadow-purple-600/20' 
+                : 'md:w-44 border-gray-300 dark:border-gray-700 hover:border-purple-400 opacity-80'
             }`}
           >
             <div className={`absolute top-0 right-0 bg-purple-600 text-white px-3 py-1 text-sm font-medium rounded-bl-lg transition-all duration-500 ${
@@ -457,12 +457,12 @@ function TokenCards({ tokens }) {
             
             {/* Versão minimizada - apenas ícone e nome */}
             {!isExpanded && (
-              <div className="p-6 flex flex-col items-center justify-center min-h-[250px]">
-                <div className="p-4 rounded-xl bg-gray-100 dark:bg-gray-800 mb-4">
-                  <token.icon className="h-10 w-10 text-primary" />
+              <div className="p-4 flex flex-col items-center justify-center min-h-[180px]">
+                <div className="p-3 rounded-xl bg-gray-100 dark:bg-gray-800 mb-3">
+                  <token.icon className="h-8 w-8 text-primary" />
                 </div>
                 <div className="text-center">
-                  <div className="font-bold text-lg mb-1">{token.name}</div>
+                  <div className="font-bold text-base mb-1">{token.name}</div>
                   <div className="text-xs text-muted-foreground">{token.subtitle}</div>
                 </div>
               </div>
@@ -470,7 +470,7 @@ function TokenCards({ tokens }) {
             
             {/* Versão expandida - conteúdo completo com delay de render para evitar jump de altura */}
             {isExpanded && (
-              <div className="min-h-[250px]">
+              <div className="min-h-[180px]">
                 {showContent ? (
                   <>
                     <CardHeader className="pb-4">
@@ -881,7 +881,7 @@ export default function Home() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-center">
             {/* Left Side - 3 Cards */}
-            <div className="space-y-4">
+            <div className="space-y-4 order-1 lg:order-none">
               {whyJoinReasons.slice(0, 3).map((reason, index) => (
                 <Card key={index} className="border-2 hover:shadow-lg transition-shadow">
                   <CardHeader className="pb-3">
@@ -900,7 +900,7 @@ export default function Home() {
             </div>
 
             {/* Center - Image (2 columns) */}
-            <div className="lg:order-none order-first lg:col-span-2">
+            <div className="lg:col-span-2 order-2 lg:order-none">
               <div className="relative aspect-video rounded-2xl overflow-hidden border-2 border-primary/20 shadow-lg">
                 <img 
                   src="/images/g6.png" 
@@ -911,7 +911,7 @@ export default function Home() {
             </div>
 
             {/* Right Side - 3 Cards */}
-            <div className="space-y-4">
+            <div className="space-y-4 order-3 lg:order-none">
               {whyJoinReasons.slice(3, 6).map((reason, index) => (
                 <Card key={index} className="border-2 hover:shadow-lg transition-shadow">
                   <CardHeader className="pb-3">
@@ -936,24 +936,20 @@ export default function Home() {
           subtitle={<ScrambleText text="Join the Revolution" />}
           description="Start using, developing or validating on Tickfy Network today"
         >
-          <div className="text-center space-y-8">
+          <div className="text-center">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="gradient" className="text-lg px-8" onClick={handleBecomeMinerClick}>
-                <Pickaxe className="mr-2 h-5 w-5" />
-                Become a Miner
-              </Button>
+              <div>
+                <Button size="lg" variant="gradient" className="text-lg px-8 gap-2" onClick={handleBecomeMinerClick}>
+                  <Pickaxe className="h-5 w-5" />
+                  Become a Miner
+                </Button>
+              </div>
               <Link to="/developers">
-                <Button size="lg" variant="outline" className="text-lg px-8">
-                  <Code className="mr-2 h-5 w-5" />
+                <Button size="lg" variant="outline" className="text-lg px-8 gap-2">
+                  <Code className="h-5 w-5" />
                   Developer Docs
                 </Button>
               </Link>
-            </div>
-            <div className="flex flex-wrap justify-center gap-3">
-              <Badge variant="outline" className="text-sm px-4 py-2">No Hidden Fees</Badge>
-              <Badge variant="outline" className="text-sm px-4 py-2">Zero Fraud</Badge>
-              <Badge variant="outline" className="text-sm px-4 py-2">Instant Transfers</Badge>
-              <Badge variant="outline" className="text-sm px-4 py-2">Full Control</Badge>
             </div>
           </div>
         </Section>

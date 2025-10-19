@@ -708,14 +708,18 @@ export default function Developers() {
         >
           <div className="mt-16 text-center">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="outline" size="lg" className="text-lg px-8 bg-white hover:bg-gray-100 border border-gray-200">
-                <Download className="mr-2 h-5 w-5" />
-                Download SDK
-              </Button>
-              <Button size="lg" className="text-lg px-8">
-                Get API Key
-                <Key className="ml-2 h-5 w-5" />
-              </Button>
+              <div>
+                <Button variant="outline" size="lg" className="text-lg px-8 bg-white hover:bg-gray-100 border border-gray-200">
+                  <Download className="mr-2 h-5 w-5" />
+                  Download SDK
+                </Button>
+              </div>
+              <div>
+                <Button size="lg" className="text-lg px-8">
+                  Get API Key
+                  <Key className="ml-2 h-5 w-5" />
+                </Button>
+              </div>
             </div>
           </div>
         </Hero>

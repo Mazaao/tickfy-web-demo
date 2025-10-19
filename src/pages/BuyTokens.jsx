@@ -156,8 +156,17 @@ export default function BuyTokens() {
           description="Calculate how much it costs to buy tokens or how much you receive selling"
         >
           <div className="grid lg:grid-cols-2 gap-8 items-start">
-            {/* Left Side - Calculator */}
-            <Card className="border-2">
+            {/* Image - First on mobile, right on desktop */}
+            <div className="relative aspect-video rounded-2xl overflow-hidden border-2 border-primary/20 shadow-lg order-first lg:order-last">
+              <img 
+                src="/images/g11.png" 
+                alt="Buy Tokens" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Calculator - Second on mobile, left on desktop */}
+            <Card className="border-2 order-last lg:order-first">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-xl">
                   <Calculator className="h-5 w-5" />
@@ -246,15 +255,6 @@ export default function BuyTokens() {
                 </div>
               </CardContent>
             </Card>
-            
-            {/* Right Side - Image */}
-            <div className="relative aspect-video rounded-2xl overflow-hidden border-2 border-primary/20 shadow-lg">
-              <img 
-                src="/images/g11.png" 
-                alt="Buy Tokens" 
-                className="w-full h-full object-cover"
-              />
-            </div>
           </div>
         </Section>
 

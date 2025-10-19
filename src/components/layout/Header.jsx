@@ -101,7 +101,7 @@ export default function Header() {
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      isScrolled 
+      (isScrolled || isMenuOpen)
         ? "bg-background/80 backdrop-blur-md border-b shadow-sm" 
         : "bg-transparent"
     )}>
@@ -231,92 +231,67 @@ export default function Header() {
           </Button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation - expande dentro do header */}
         <div className={cn(
-          "lg:hidden fixed inset-x-0 top-16 z-40 transform transition-transform duration-300 ease-in-out",
-          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+          "lg:hidden overflow-hidden transition-all duration-300 ease-in-out",
+          isMenuOpen ? "max-h-[calc(100vh-4rem)] opacity-100" : "max-h-0 opacity-0"
         )}>
-          <div className="bg-background/95 backdrop-blur-md border-b shadow-lg min-h-screen">
-            <div className="px-4 pt-4 pb-6 space-y-2">
-              {navigation.map((item) => (
-                <div key={item.name}>
-                  <Link
-                    to={item.href}
-                    className={cn(
-                      "block px-4 py-3 rounded-lg text-base font-medium transition-colors text-foreground hover:bg-gray-100 dark:hover:bg-gray-800",
-                      item.name === 'Learn and Use' && (isLearnAndUse || isLearnRelated) && 'text-primary',
-                      item.name === 'Developers' && isDevelopers && 'text-primary',
-                      item.name === 'Community' && isCommunity && 'text-primary',
-                      item.name === 'Forum' && isForum && 'text-primary'
-                    )}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                  {item.items && (
-                    <div className="ml-4 mt-2 space-y-1">
-                      {item.items.map((subItem) => (
-                        <Link
-                          key={subItem.name}
-                          to={subItem.href}
-                          onClick={(e) => handleNavigationClick(e, subItem.href)}
-                          className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                        >
-                          • {subItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-              <div className="pt-6 space-y-3 px-4">
+          <div className="px-4 pt-4 pb-6 space-y-2">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={cn(
+                  "block px-4 py-3 rounded-lg text-base font-medium transition-colors text-foreground hover:bg-gray-100 dark:hover:bg-gray-800",
+                  item.name === 'Learn and Use' && (isLearnAndUse || isLearnRelated) && 'text-primary',
+                  item.name === 'Developers' && isDevelopers && 'text-primary',
+                  item.name === 'Community' && isCommunity && 'text-primary',
+                  item.name === 'Forum' && isForum && 'text-primary'
+                )}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <div className="pt-8 space-y-4 px-4">
+              <Button 
+                variant={isBecomeMiner ? "default" : "outline"} 
+                className={cn(
+                  "w-full justify-center gap-3 h-12",
+                  !isBecomeMiner && "hover:bg-gray-100 dark:hover:bg-gray-800"
+                )} 
+                onClick={handleBecomeMinerClick}
+              >
+                <Pickaxe className="h-5 w-5" />
+                Become a Miner
+              </Button>
+              <Button 
+                variant={isDelegateTokens ? "default" : "outline"} 
+                className={cn(
+                  "w-full justify-center gap-3 h-12",
+                  !isDelegateTokens && "hover:bg-gray-100 dark:hover:bg-gray-800"
+                )} 
+                onClick={handleDelegateTokensClick}
+              >
+                <HandCoins className="h-5 w-5" />
+                Delegate Tokens
+              </Button>
+              <Link to="/buy-tokens" className="block">
                 <Button 
-                  variant={isBecomeMiner ? "default" : "outline"} 
+                  variant={isBuyTokens ? "default" : "outline"} 
                   className={cn(
-                    "w-full justify-start gap-3 h-12",
-                    !isBecomeMiner && "hover:bg-gray-100 dark:hover:bg-gray-800"
+                    "w-full justify-center gap-3 h-12",
+                    !isBuyTokens && "hover:bg-gray-100 dark:hover:bg-gray-800"
                   )} 
-                  onClick={handleBecomeMinerClick}
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  <Pickaxe className="h-5 w-5" />
-                  Become a Miner
+                  <Wallet className="h-5 w-5" />
+                  Buy Tokens
                 </Button>
-                <Button 
-                  variant={isDelegateTokens ? "default" : "outline"} 
-                  className={cn(
-                    "w-full justify-start gap-3 h-12",
-                    !isDelegateTokens && "hover:bg-gray-100 dark:hover:bg-gray-800"
-                  )} 
-                  onClick={handleDelegateTokensClick}
-                >
-                  <HandCoins className="h-5 w-5" />
-                  Delegate Tokens
-                </Button>
-                <Link to="/buy-tokens">
-                  <Button 
-                    variant={isBuyTokens ? "default" : "outline"} 
-                    className={cn(
-                      "w-full gap-3 h-12",
-                      !isBuyTokens && "hover:bg-gray-100 dark:hover:bg-gray-800"
-                    )} 
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <Wallet className="h-5 w-5" />
-                    Buy Tokens
-                  </Button>
-                </Link>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
-
-        {/* Mobile Menu Overlay */}
-        {isMenuOpen && (
-          <div 
-            className="lg:hidden fixed inset-0 z-30 bg-black/20 backdrop-blur-sm"
-            onClick={() => setIsMenuOpen(false)}
-          />
-        )}
       </div>
     </header>
   )

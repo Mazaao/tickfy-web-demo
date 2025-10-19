@@ -122,8 +122,22 @@ export default function Forum() {
       <div className="pt-8">
 
         <Section>
-          <div className="flex justify-between items-center mb-8">
-            <div className="flex gap-2 flex-wrap">
+          <div className="flex justify-between items-center gap-4 mb-8">
+            {/* Mobile: Select dropdown */}
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="sm:hidden flex-1 px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+            >
+              {categories.map((category) => (
+                <option key={category.name} value={category.name}>
+                  {category.name} ({category.count})
+                </option>
+              ))}
+            </select>
+
+            {/* Desktop: Buttons */}
+            <div className="hidden sm:flex gap-2 flex-wrap">
               {categories.map((category) => (
                 <Button
                   key={category.name}
@@ -138,6 +152,7 @@ export default function Forum() {
                 </Button>
               ))}
             </div>
+
             <Button
               onClick={() => setShowCreatePost(true)}
               variant="gradient"
