@@ -15,29 +15,29 @@ import {
 // Section: APIs & Integration
 const sdkFeatures = [
   {
-    title: 'Tickfy SDK for JavaScript',
-    description: 'Complete SDK for web and Node.js applications',
-    icon: Code,
+    title: 'Install Tickfy SDK',
+    description: 'Add the official Tickfy SDK to your project',
+    icon: Download,
     features: ['Wallet integration', 'Event management', 'Marketplace', 'Webhooks'],
     installCommand: 'npm install @tickfy/sdk'
   },
   {
-    title: 'REST API',
-    description: 'RESTful API for any programming language',
-    icon: Globe,
+    title: 'Configure Network Connection',
+    description: 'Set up connection with Tickfy blockchain nodes',
+    icon: Network,
     features: ['Standardized endpoints', 'JWT authentication', 'Rate limiting', 'OpenAPI documentation'],
     installCommand: 'curl -X GET https://api.tickfy.network/v1/events'
   },
   {
-    title: 'GraphQL API',
-    description: 'GraphQL API for optimized queries',
-    icon: Database,
+    title: 'Implement Event Creation',
+    description: 'Create and manage events with NFT tickets',
+    icon: Blocks,
     features: ['Flexible queries', 'Real-time subscriptions', 'Schema introspection', 'Playground'],
     installCommand: 'query { events { id name tickets { price } } }'
   },
   {
-    title: 'Webhooks',
-    description: 'Real-time notifications for events',
+    title: 'Deploy to Production',
+    description: 'Launch your ticketing platform on mainnet',
     icon: Zap,
     features: ['Event triggers', 'Automatic retry', 'HMAC signature', 'Detailed logs'],
     installCommand: 'POST /api/v1/webhooks'
@@ -730,77 +730,141 @@ export default function Developers() {
           description="Integrate NFT tickets into any application with our complete APIs"
           background="muted"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {sdkFeatures.map((sdk, index) => (
-              <Card key={index} className="border-2 hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex items-center gap-3">
-                    <div className="p-3 rounded-lg bg-blue-100 dark:bg-blue-950/20">
-                      <sdk.icon className="h-6 w-6 text-blue-600" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-xl">{sdk.title}</CardTitle>
-                      <CardDescription className="text-base">
-                        {sdk.description}
-                      </CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    {sdk.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <CheckCircle className="h-4 w-4 text-green-600 flex-shrink-0" />
-                        <span>{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="bg-muted/50 p-3 rounded-lg">
-                    <code className="text-sm">{sdk.installCommand}</code>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </Section>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Image */}
+            <div>
+              <div className="relative aspect-video rounded-2xl overflow-hidden border-2 border-primary/20 shadow-lg">
+                <img 
+                  src="/images/g15.png" 
+                  alt="API Integration" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
 
-        {/* Section: Blockchain & Contracts */}
-        <Section
-          id="blockchain"
-          title="Blockchain & Contracts"
-          subtitle={<ScrambleText text="Technical Specifications" />}
-          description="Built on Cosmos SDK with optimized smart contracts"
-        >
-          <div className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {consensusFeatures.map((feature, index) => (
-                <Card key={index} className="border-2 hover:shadow-lg transition-shadow text-center">
-                  <CardHeader>
-                    <div className="mx-auto w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-950/20 flex items-center justify-center mb-3">
-                      <feature.icon className="h-6 w-6 text-purple-600" />
-                    </div>
-                    <CardTitle className="text-lg">{feature.title}</CardTitle>
-                    <CardDescription className="text-sm">
-                      {feature.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2">
-                      {feature.specs.map((spec, idx) => (
-                        <div key={idx} className="text-xs text-muted-foreground">
-                          • {spec}
+            {/* Right Side - Steps with connections */}
+            <div className="relative">
+              <div className="space-y-6">
+                {sdkFeatures.map((sdk, index) => (
+                  <div key={index} className="relative">
+                    {/* Connection line to next step */}
+                    {index < sdkFeatures.length - 1 && (
+                      <>
+                        {/* Múltiplas linhas de partículas espalhadas pela largura do card */}
+                        {/* Linha 1 - 20% */}
+                        <div 
+                          className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none"
+                          style={{ left: '20%' }}
+                        >
+                          <div 
+                            className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-transparent via-purple-500 to-transparent"
+                            style={{
+                              animation: 'flowDown 2s ease-in-out infinite',
+                              animationDelay: `${index * 5}s`,
+                              left: '-3px',
+                              filter: 'blur(1px)'
+                            }}
+                          />
                         </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+
+                        {/* Linha 2 - 40% */}
+                        <div 
+                          className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none"
+                          style={{ left: '40%' }}
+                        >
+                          <div 
+                            className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-transparent via-purple-600 to-transparent"
+                            style={{
+                              animation: 'flowDown 1.4s ease-in-out infinite',
+                              animationDelay: `${index * 5}s`,
+                              left: '-3px',
+                              filter: 'blur(1px)'
+                            }}
+                          />
+                        </div>
+
+                        {/* Linha 3 - 60% */}
+                        <div 
+                          className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none"
+                          style={{ left: '60%' }}
+                        >
+                          <div 
+                            className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-transparent via-purple-500 to-transparent"
+                            style={{
+                              animation: 'flowDown 1s ease-in-out infinite',
+                              animationDelay: `${index * 5}s`,
+                              left: '-2.5px',
+                              filter: 'blur(1px)'
+                            }}
+                          />
+                        </div>
+
+                        {/* Linha 4 - 80% */}
+                        <div 
+                          className="absolute top-full w-0.5 h-6 overflow-visible pointer-events-none"
+                          style={{ left: '80%' }}
+                        >
+                          <div 
+                            className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-transparent via-purple-500 to-transparent"
+                            style={{
+                              animation: 'flowDown 1.8s ease-in-out infinite',
+                              animationDelay: `${index * 5}s`,
+                              left: '-2.5px',
+                              filter: 'blur(1px)'
+                            }}
+                          />
+                        </div>
+                      </>
+                    )}
+
+                    <Card className="border-2 hover:shadow-lg transition-shadow">
+                      <CardHeader className="py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-950/20 flex items-center justify-center flex-shrink-0 relative">
+                            <div className="absolute inset-0 rounded-full bg-purple-600 opacity-20 flex items-center justify-center">
+                              <span className="text-xs font-bold text-purple-600">{index + 1}</span>
+                            </div>
+                            <sdk.icon className="h-5 w-5 text-purple-600 relative z-10" />
+                          </div>
+                          <div className="flex-1">
+                            <CardTitle className="text-base">{sdk.title}</CardTitle>
+                            <CardDescription className="text-xs mt-0.5">
+                              {sdk.description}
+                            </CardDescription>
+                          </div>
+                        </div>
+                      </CardHeader>
+                    </Card>
+                  </div>
+                ))}
+              </div>
+
+              {/* Animation styles */}
+              <style jsx>{`
+                @keyframes flowDown {
+                  0% {
+                    transform: translateY(0) scaleY(1);
+                    opacity: 0;
+                  }
+                  10% {
+                    opacity: 1;
+                  }
+                  90% {
+                    opacity: 1;
+                  }
+                  100% {
+                    transform: translateY(24px) scaleY(0.8);
+                    opacity: 0;
+                  }
+                }
+              `}</style>
             </div>
           </div>
         </Section>
 
         {/* Section: Code Examples */}
         <Section
+          id="code-examples"
           title="Code Examples"
           subtitle={<ScrambleText text="For Ticketing Agencies" />}
           description="Ready-to-use code to implement essential features"

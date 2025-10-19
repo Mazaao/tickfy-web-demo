@@ -155,7 +155,8 @@ export default function BuyTokens() {
           title="Token Calculator"
           description="Calculate how much it costs to buy tokens or how much you receive selling"
         >
-          <div className="max-w-2xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
+            {/* Left Side - Calculator */}
             <Card className="border-2">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-xl">
@@ -186,10 +187,29 @@ export default function BuyTokens() {
                       TKFYT (Transaction)
                     </Button>
                   </div>
+                  
+                  {/* Info Messages */}
+                  {selectedToken === 'TKFY' && (
+                    <div className="mt-3 flex items-start gap-2 p-3 bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 rounded-lg">
+                      <AlertCircle className="h-4 w-4 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5" />
+                      <p className="text-sm text-purple-700 dark:text-purple-300">
+                        <strong>Minimum to mine:</strong> 5,000 TKFY required to become a validator
+                      </p>
+                    </div>
+                  )}
+                  
+                  {selectedToken === 'TKFYT' && (
+                    <div className="mt-3 flex items-start gap-2 p-3 bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 rounded-lg">
+                      <AlertCircle className="h-4 w-4 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5" />
+                      <p className="text-sm text-purple-700 dark:text-purple-300">
+                        <strong>Ticket mint cost:</strong> 1,000 TKFYT per ticket
+                      </p>
+                    </div>
+                  )}
                 </div>
 
                 {/* Conversion Fields */}
-                <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
                   <div>
                     <label className="text-sm font-medium mb-2 block">Value in USDT:</label>
                     <div className="relative">
@@ -204,12 +224,6 @@ export default function BuyTokens() {
                       <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-muted-foreground font-medium">
                         USDT
                       </span>
-                    </div>
-                  </div>
-
-                  <div className="flex justify-center">
-                    <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-                      <ArrowLeftRight className="h-4 w-4" />
                     </div>
                   </div>
 
@@ -230,21 +244,17 @@ export default function BuyTokens() {
                     </div>
                   </div>
                 </div>
-
-                {/* Exchange Rate */}
-                <div className="bg-muted/50 p-4 rounded-lg">
-                  <div className="text-sm text-muted-foreground mb-1">Current Rate:</div>
-                  <div className="font-medium">
-                    1 {selectedToken} = {exchangeRates[selectedToken].toFixed(selectedToken === 'TKFYT' ? 6 : 2)} USDT
-                  </div>
-                  {selectedToken === 'TKFYT' && (
-                    <div className="text-sm text-muted-foreground mt-1">
-                      (1M TKFYT = 1 USDT)
-                    </div>
-                  )}
-                </div>
               </CardContent>
             </Card>
+            
+            {/* Right Side - Image */}
+            <div className="relative aspect-video rounded-2xl overflow-hidden border-2 border-primary/20 shadow-lg">
+              <img 
+                src="/images/g11.png" 
+                alt="Buy Tokens" 
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </Section>
 
@@ -299,85 +309,6 @@ export default function BuyTokens() {
           </div>
         </Section>
 
-        <Section
-          title="Complete Tutorial"
-          subtitle={<ScrambleText text="Learn More" />}
-          description="For detailed instructions on how to use the platform"
-          background="gradient"
-        >
-          <div className="text-center space-y-6">
-            <div className="max-w-2xl mx-auto">
-              <p className="text-lg text-muted-foreground mb-6">
-                For a complete guide on how to buy, sell, use tokens and explore all platform features, visit our dedicated section.
-              </p>
-            </div>
-            <Link to="/">
-              <Button size="lg" className="text-lg px-8">
-                View Complete Platform Guide
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-          </div>
-        </Section>
-
-        <Section
-          title="Need Help?"
-            subtitle={<ScrambleText text="Support and Documentation" />}
-          description="Additional resources to buy and manage tokens"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-            <Card className="text-center hover:shadow-md transition-shadow">
-              <CardHeader>
-                <div className="mx-auto w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-4">
-                  <ExternalLink className="h-6 w-6" />
-                </div>
-                <CardTitle>Video Tutorial</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4">
-                  Watch the complete step-by-step guide
-                </CardDescription>
-                <Button variant="outline" className="w-full">
-                  Watch Tutorial
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center hover:shadow-md transition-shadow">
-              <CardHeader>
-                <div className="mx-auto w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center mb-4">
-                  <AlertCircle className="h-6 w-6" />
-                </div>
-                <CardTitle>FAQ</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4">
-                  Frequently asked questions about tokens
-                </CardDescription>
-                <Button variant="outline" className="w-full">
-                  View FAQ
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center hover:shadow-md transition-shadow">
-              <CardHeader>
-                <div className="mx-auto w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mb-4">
-                  <CreditCard className="h-6 w-6" />
-                </div>
-                <CardTitle>Support</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4">
-                  Talk to our support team
-                </CardDescription>
-                <Button variant="outline" className="w-full">
-                  Contact Support
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </Section>
       </div>
     </>
   )

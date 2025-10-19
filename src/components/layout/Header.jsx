@@ -11,7 +11,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '../ui/navigation-menu'
-import { Menu, X, ChevronDown, Wallet, Rocket, Pickaxe } from 'lucide-react'
+import { Menu, X, ChevronDown, Wallet, Rocket, Pickaxe, HandCoins } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
 const navigation = [
@@ -31,10 +31,11 @@ const navigation = [
     items: [
       { name: 'Overview', href: '/developers#overview', description: 'Why develop on Tickfy' },
       { name: 'APIs & Integration', href: '/developers#apis', description: 'SDKs and tools' },
-      { name: 'Blockchain', href: '/developers#blockchain', description: 'Contracts and infrastructure' }
+      { name: 'Code Examples', href: '/developers#code-examples', description: 'Implementation examples' }
     ]
   },
   { name: 'Community', href: '/community' },
+  { name: 'Forum', href: '/forum' },
 ]
 
 export default function Header() {
@@ -47,14 +48,15 @@ export default function Header() {
   const pathname = location.pathname
   const isDevelopers = pathname.startsWith('/developers')
   const isCommunity = pathname.startsWith('/community')
-  const isLearnAndUse = !isDevelopers && !isCommunity // default group for home and general pages
+  const isForum = pathname.startsWith('/forum')
   const isBecomeMiner = pathname.startsWith('/become-miner')
+  const isDelegateTokens = pathname.startsWith('/delegate-tokens')
+  const isBuyTokens = pathname.startsWith('/buy-tokens')
+  const isLearnAndUse = !isDevelopers && !isCommunity && !isForum && !isBecomeMiner && !isDelegateTokens && !isBuyTokens // default group for home and general pages
   const isLearnRelated = (
     pathname === '/' ||
     pathname.startsWith('/learn') ||
-    pathname.startsWith('/build') ||
-    pathname.startsWith('/buy-tokens') ||
-    pathname.startsWith('/become-miner')
+    pathname.startsWith('/build')
   )
 
   useEffect(() => {
@@ -90,6 +92,12 @@ export default function Header() {
     setIsMenuOpen(false)
   }
 
+  const handleDelegateTokensClick = () => {
+    navigate('/delegate-tokens')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setIsMenuOpen(false)
+  }
+
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
@@ -113,7 +121,8 @@ export default function Header() {
                   className={cn(
                     (item.name === 'Learn and Use' && (isLearnAndUse || isLearnRelated)) && 'text-primary',
                     (item.name === 'Developers' && isDevelopers) && 'text-primary',
-                    (item.name === 'Community' && isCommunity) && 'text-primary'
+                    (item.name === 'Community' && isCommunity) && 'text-primary',
+                    (item.name === 'Forum' && isForum) && 'text-primary'
                   )}
                 >
                   {item.items ? (
@@ -153,7 +162,8 @@ export default function Header() {
                         to={item.href}
                         className={cn(
                           "inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 focus:bg-transparent focus:outline-none",
-                          item.name === 'Community' && isCommunity && 'text-primary'
+                          item.name === 'Community' && isCommunity && 'text-primary',
+                          item.name === 'Forum' && isForum && 'text-primary'
                         )}
                       >
                         {item.name}
@@ -167,12 +177,39 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center space-x-3">
-            <Button variant="outline" size="sm" className="gap-2 hover:bg-gray-100 dark:hover:bg-gray-800" onClick={handleBecomeMinerClick}>
+            <Button 
+              variant={isBecomeMiner ? "default" : "outline"} 
+              size="sm" 
+              className={cn(
+                "gap-2",
+                !isBecomeMiner && "hover:bg-gray-100 dark:hover:bg-gray-800"
+              )} 
+              onClick={handleBecomeMinerClick}
+            >
               <Pickaxe className="h-4 w-4" />
               Become a Miner
             </Button>
+            <Button 
+              variant={isDelegateTokens ? "default" : "outline"} 
+              size="sm" 
+              className={cn(
+                "gap-2",
+                !isDelegateTokens && "hover:bg-gray-100 dark:hover:bg-gray-800"
+              )} 
+              onClick={handleDelegateTokensClick}
+            >
+              <HandCoins className="h-4 w-4" />
+              Delegate Tokens
+            </Button>
             <Link to="/buy-tokens#overview">
-              <Button variant="default" size="sm" className="gap-2">
+              <Button 
+                variant={isBuyTokens ? "default" : "outline"} 
+                size="sm" 
+                className={cn(
+                  "gap-2",
+                  !isBuyTokens && "hover:bg-gray-100 dark:hover:bg-gray-800"
+                )}
+              >
                 <Wallet className="h-4 w-4" />
                 Buy Tokens
               </Button>
@@ -209,7 +246,8 @@ export default function Header() {
                       "block px-4 py-3 rounded-lg text-base font-medium transition-colors text-foreground hover:bg-gray-100 dark:hover:bg-gray-800",
                       item.name === 'Learn and Use' && (isLearnAndUse || isLearnRelated) && 'text-primary',
                       item.name === 'Developers' && isDevelopers && 'text-primary',
-                      item.name === 'Community' && isCommunity && 'text-primary'
+                      item.name === 'Community' && isCommunity && 'text-primary',
+                      item.name === 'Forum' && isForum && 'text-primary'
                     )}
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -232,12 +270,37 @@ export default function Header() {
                 </div>
               ))}
               <div className="pt-6 space-y-3 px-4">
-                <Button variant="outline" className="w-full justify-start gap-3 h-12 hover:bg-gray-100 dark:hover:bg-gray-800" onClick={handleBecomeMinerClick}>
+                <Button 
+                  variant={isBecomeMiner ? "default" : "outline"} 
+                  className={cn(
+                    "w-full justify-start gap-3 h-12",
+                    !isBecomeMiner && "hover:bg-gray-100 dark:hover:bg-gray-800"
+                  )} 
+                  onClick={handleBecomeMinerClick}
+                >
                   <Pickaxe className="h-5 w-5" />
                   Become a Miner
                 </Button>
+                <Button 
+                  variant={isDelegateTokens ? "default" : "outline"} 
+                  className={cn(
+                    "w-full justify-start gap-3 h-12",
+                    !isDelegateTokens && "hover:bg-gray-100 dark:hover:bg-gray-800"
+                  )} 
+                  onClick={handleDelegateTokensClick}
+                >
+                  <HandCoins className="h-5 w-5" />
+                  Delegate Tokens
+                </Button>
                 <Link to="/buy-tokens">
-                  <Button variant="default" className="w-full gap-3 h-12" onClick={() => setIsMenuOpen(false)}>
+                  <Button 
+                    variant={isBuyTokens ? "default" : "outline"} 
+                    className={cn(
+                      "w-full gap-3 h-12",
+                      !isBuyTokens && "hover:bg-gray-100 dark:hover:bg-gray-800"
+                    )} 
+                    onClick={() => setIsMenuOpen(false)}
+                  >
                     <Wallet className="h-5 w-5" />
                     Buy Tokens
                   </Button>

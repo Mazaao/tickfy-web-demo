@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom'
 import Hero from '../components/sections/Hero'
 import ScrambleText from '../components/ui/ScrambleText'
 import Section from '../components/sections/Section'
 import FeatureGrid from '../components/sections/FeatureGrid'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
-import { MessageCircle, Users, Calendar, Globe, Shield, Star, Zap } from 'lucide-react'
+import { Button } from '../components/ui/button'
+import { MessageCircle, Users, Calendar, Globe, Shield, Star, Zap, Twitter, Send, MessageSquare, ArrowRight } from 'lucide-react'
 
 const communityChannels = [
   {
@@ -68,7 +70,54 @@ export default function Community() {
         subtitle={<ScrambleText text="Join Our Community" />}
         title="Connect with Event Innovators"
         description="Be part of the global Tickfy community revolutionizing event ticketing and experiences."
-      />
+      >
+        {/* Social Media Icons */}
+        <div className="mt-8 flex justify-center gap-4">
+          <a 
+            href="https://twitter.com/tickfy" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group"
+          >
+            <div className="w-14 h-14 rounded-lg bg-transparent flex items-center justify-center transition-all border border-gray-300 dark:border-gray-700 group-hover:border-purple-500 group-hover:bg-purple-50 dark:group-hover:bg-purple-950/20">
+              <Twitter className="h-6 w-6 text-gray-600 dark:text-gray-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors" />
+            </div>
+          </a>
+          
+          <a 
+            href="https://t.me/tickfy" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group"
+          >
+            <div className="w-14 h-14 rounded-lg bg-transparent flex items-center justify-center transition-all border border-gray-300 dark:border-gray-700 group-hover:border-purple-500 group-hover:bg-purple-50 dark:group-hover:bg-purple-950/20">
+              <Send className="h-6 w-6 text-gray-600 dark:text-gray-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors" />
+            </div>
+          </a>
+          
+          <a 
+            href="https://discord.gg/tickfy" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group"
+          >
+            <div className="w-14 h-14 rounded-lg bg-transparent flex items-center justify-center transition-all border border-gray-300 dark:border-gray-700 group-hover:border-purple-500 group-hover:bg-purple-50 dark:group-hover:bg-purple-950/20">
+              <MessageSquare className="h-6 w-6 text-gray-600 dark:text-gray-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors" />
+            </div>
+          </a>
+          
+          <a 
+            href="https://github.com/tickfy" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group"
+          >
+            <div className="w-14 h-14 rounded-lg bg-transparent flex items-center justify-center transition-all border border-gray-300 dark:border-gray-700 group-hover:border-purple-500 group-hover:bg-purple-50 dark:group-hover:bg-purple-950/20">
+              <Globe className="h-6 w-6 text-gray-600 dark:text-gray-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors" />
+            </div>
+          </a>
+        </div>
+      </Hero>
 
       {/* Administrators Section */}
       <Section
@@ -109,13 +158,22 @@ export default function Community() {
         </div>
       </Section>
 
+      {/* Forum Call to Action */}
       <Section
-        title="Community Channels"
-        subtitle={<ScrambleText text="Stay Connected" />}
-        description="Join our vibrant community across multiple platforms and channels."
+        title="Join the Discussion"
+        subtitle={<ScrambleText text="Community Forum" />}
+        description="Share ideas, ask questions, and connect with other members"
         background="muted"
       >
-        <FeatureGrid features={communityChannels} columns={2} />
+        <div className="text-center">
+          <Link to="/forum">
+            <Button size="lg" variant="gradient" className="text-lg px-8">
+              <MessageCircle className="mr-2 h-5 w-5" />
+              Visit Forum
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
+        </div>
       </Section>
       </div>
     </>
